@@ -5,6 +5,16 @@
 
 This is a branch from HDC (Head direction coder) for experiments to investigate animal cognition.
 
+Jinook Oh, Cognitive Biology department, University of Vienna<br>
+Contact: jinook0707@gmail.com, tecumseh.fitch@univie.ac.at<br>
+February 2020.
+
+## Dependency:
+- **wxPython** (4.0)
+- **numPy** (1.17)
+- **OpenCV** (4.1)
+
+
 ## What it does.
 The first process is done by **pyABC.py**, it is an automated tracking of an animal or certain part of animal in a specific experimental setup, using a combination of computer vision algorithms.
 It produces a CSV (comma separated values) text file as an initial result
@@ -22,7 +32,7 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 
 ## How to use.
 
-### pyABC.py
+### *pyABC.py*
 1) Click **Analyze video** button, then choose MP4, MOV or AVI video file.
 2) Set proper parameters on the left side. Each parameter has [?] button to explain what it is.
 3) Press **Spacebar** key to start/stop automatic analysis.
@@ -32,7 +42,7 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 * A user also can enter a manual data by click-and-drag mouse pointer on the video frame image directly.
 * If **Continuous manual input** is checked, the data of previous frame will be copied to the current frame.
 
-### reviseCSV.py
+### *reviseCSV.py*
 1) Choose a CSV file (result from pyABC.py) to open
 2) Click **Smooth** button to smooth data. (Averaging data in sliding window (+/- 5 frames by default))
 3) When errenous frames are noticed, click **SelectionMode** button or press Shift + S. > Click the beginning of selection, then click the end frame of selection. > Enter data and click **Set** button, or click **Linear interpolation** button.
@@ -54,14 +64,4 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 1) Add a line to call a case specific function in **proc_img** function.
   e.g.) elif animalECase == 'Macaque19': x, frame_arr, diff = self.proc_macaque19(x, frame_arr)
 2) Add a function to calculate data for automatic tracking, such as **proc_macaque19**.
-
-
-Jinook Oh, Cognitive Biology department, University of Vienna<br>
-Contact: jinook0707@gmail.com, tecumseh.fitch@univie.ac.at<br>
-February 2020.
-
-## Dependency:
-- **wxPython** (4.0)
-- **numPy** (1.17)
-- **OpenCV** (4.1)
 
