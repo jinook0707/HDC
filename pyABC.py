@@ -371,6 +371,7 @@ class AnimalBehaviourCoderFrame(wx.Frame):
         row = 0; col = 0
         self.dataGrid = Grid(self.panel["rp"], np.empty((0,0), dtype=np.uint8))
         self.Bind(wx.grid.EVT_GRID_CELL_CHANGED, self.onDataGridCellChanged)
+        self.Bind(wx.grid.EVT_GRID_SELECT_CELL, self.onDataGridCellSelected)
         self.Bind(wx.grid.EVT_GRID_RANGE_SELECT, self.onDataGridCellsSelected)
         add2gbs(self.gbs["rp"], self.dataGrid, (row,col), (1,nCol))
         row += 1; col = 0
@@ -1175,6 +1176,9 @@ class AnimalBehaviourCoderFrame(wx.Frame):
                 x[dCol] = self.oData[self.vRW.fi][dIdx]
             else:
                 x[dCol] = self.dataInitVal[dIdx]
+            ### convert value to integer if applicable
+            try: x[dCol] = int(x[dCol])
+            except: pass
             ### data from previous frame
             pk = "p_" + dCol
             if self.vRW.fi == 0:
@@ -1203,18 +1207,17 @@ class AnimalBehaviourCoderFrame(wx.Frame):
         
         if self.oData[self.vRW.fi][self.mhpi] == "True":
         # head position is manually determined via mouse-click on image 
-            if len(self.dataGridSelectedCells) > 1:
-            # if multiple cells are selected in dataGrid
-                for i in range(len(self.dataGridSelectedCells)):
-                # going through all selected cells 
-                    ri = self.dataGridSelectedCells[i][0] # row index
-                    if ri != self.vRW.fi:
-                        # copy data of the current frame 
-                        #   to other selected frames 
-                        self.oData[ri] = list(self.oData[self.vRW.fi]) 
+            for i in range(len(self.dataGridSelectedCells)):
+            # going through all selected cells 
+                ri = self.dataGridSelectedCells[i][0] # row index
+                if ri != self.vRW.fi:
+                    # copy data of the current frame 
+                    #   to other selected frames 
+                    self.oData[ri] = copy(self.oData[self.vRW.fi]) 
       
         ### update data grid position to make newly calculated data visible 
         self.dataGrid.MakeCellVisible(self.vRW.fi, 0)
+        self.dataGrid.SelectRow(self.vRW.fi)
         self.dataGrid.SetGridCursor(self.vRW.fi, 0)
          
         if self.isRunning:
@@ -1459,13 +1462,22 @@ class AnimalBehaviourCoderFrame(wx.Frame):
                 ci = self.dataGridSelectedCells[i][1]
                 self.oData[ri][ci] = str(value)
             self.dataGridSelectedCells = []
-     
+    
+    #-------------------------------------------------------------------
+    
+    def onDataGridCellSelected(self, event):
+        ''' store selected cell
+        '''
+        if DEBUG: print("AnimalBehaviourCoderFrame.onDataGridCellSelected()")
+        self.dataGridSelectedCells = [(event.GetRow(), event.GetCol())]
+
     #-------------------------------------------------------------------
     
     def onDataGridCellsSelected(self, event):
         ''' store selected multiple cells
         '''
         if DEBUG: print("AnimalBehaviourCoderFrame.onDataGridCellsSelected()")
+      
         if self.dataGrid.GetSelectionBlockTopLeft():
             self.dataGridSelectedCells = []
             tL = self.dataGrid.GetSelectionBlockTopLeft()[0]
@@ -1473,7 +1485,7 @@ class AnimalBehaviourCoderFrame(wx.Frame):
             for ri in range(tL[0], bR[0]+1):
                 for ci in range(tL[1], bR[1]+1):
                     self.dataGridSelectedCells.append( (ri,ci) )
-    
+         
     #-------------------------------------------------------------------
     
     def callback(self, rData):
