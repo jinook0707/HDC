@@ -43,7 +43,7 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 * If **Continuous manual input** is checked, the data of previous frame will be copied to the current frame.
 
 ### Run *reviseCSV.py* to revise initial result (CSV file) from pyABC.py.
-1) Choose a CSV file (result from pyABC.py) to open
+1) Choose a CSV file (result from pyABC.py) to open.
 2) Click **Smooth** button to smooth data. (Averaging data in sliding window (+/- 5 frames by default))
 3) When errenous frames are noticed, click **SelectionMode** button or press Shift + S. > Click the beginning of selection, then click the end frame of selection. > Enter data and click **Set** button, or click **Linear interpolation** button.
 4) Click **Save CSV** button to save revised CSV data.
