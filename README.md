@@ -32,7 +32,7 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 
 ## How to use.
 
-### *pyABC.py*
+### Run *pyABC.py* to automatically analyse a video recording of an experimental session.
 1) Click **Analyze video** button, then choose MP4, MOV or AVI video file.
 2) Set proper parameters on the left side. Each parameter has [?] button to explain what it is.
 3) Press **Spacebar** key to start/stop automatic analysis.
@@ -42,7 +42,7 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 * A user also can enter a manual data by click-and-drag mouse pointer on the video frame image directly.
 * If **Continuous manual input** is checked, the data of previous frame will be copied to the current frame.
 
-### *reviseCSV.py*
+### Run *reviseCSV.py* to revise initial CSV data from pyABC.py.
 1) Choose a CSV file (result from pyABC.py) to open
 2) Click **Smooth** button to smooth data. (Averaging data in sliding window (+/- 5 frames by default))
 3) When errenous frames are noticed, click **SelectionMode** button or press Shift + S. > Click the beginning of selection, then click the end frame of selection. > Enter data and click **Set** button, or click **Linear interpolation** button.
