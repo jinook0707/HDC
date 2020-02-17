@@ -52,6 +52,10 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 * Left mouse click on graph will make the video jump to the clicked frame. (Also, a user can enter specific frame index and click **go** button.)
 * Right mouse click on graph will add a small marker on graph. Functionality of this marker is only to notify certain frame for user in short term. For example, to mark the beginning frame of erreneous result to apply adjustments after the errenous result. User can clear all markers by clicking **Clear markers** button.
 
+### Remarks
+1) To start mamoset video (also macaque) analysis, a user can simply start running it with spacebar key. (No need to give any initial input)
+2) For rat video analysis, a user should click-and-drag for giving an initial head direction on the first frame image. Then, continuous analysis can be conducted on all the consecutive frame images by pressing spacebar key.
+
 
 ## How to add new experiment analysis
 
@@ -64,4 +68,6 @@ Then, the second process should be conducted via **reviseCSV.py**, to correct su
 1) Add a line to call a case specific function in **proc_img** function.
   e.g.) elif animalECase == 'Macaque19': x, frame_arr, diff = self.proc_macaque19(x, frame_arr)
 2) Add a function to calculate data for automatic tracking, such as **proc_macaque19**.
+
+
 
