@@ -10,6 +10,7 @@ Contact: jinook0707@gmail.com, tecumseh.fitch@univie.ac.at<br>
 February 2020.
 
 ## Dependency:
+- **Python** (3.7)
 - **wxPython** (4.0)
 - **numPy** (1.17)
 - **OpenCV** (4.1)
