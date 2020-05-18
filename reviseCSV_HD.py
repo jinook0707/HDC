@@ -4,6 +4,7 @@
 reviseCSV
 An open-source software written in Python
   for revising CSV data, produced by pyABC.py 
+('reviseCSV_HD.py' is for correcting head direction data.)
 
 This program was coded and tested in macOS 10.13.
 
@@ -65,11 +66,11 @@ import wx.lib.scrolledpanel as SPanel
 import numpy as np
 from scipy.stats import circmean
 
-from videoRW import VideoRW
-from fFuncNClasses import GNU_notice, get_time_stamp, getWXFonts
-from fFuncNClasses import convt_180_to_360, convt_360_to_180, str2num
-from fFuncNClasses import updateFrameSize, add2gbs, receiveDataFromQueue
-from fFuncNClasses import stopAllTimers, calc_pt_w_angle_n_dist, calcI2DIRatio
+from modVideoRW import VideoRW
+from modFFC import GNU_notice, get_time_stamp, getWXFonts
+from modFFC import convt_180_to_360, convt_360_to_180, str2num
+from modFFC import updateFrameSize, add2gbs, receiveDataFromQueue
+from modFFC import stopAllTimers, calc_pt_w_angle_n_dist, calcI2DIRatio
 
 DEBUG = False
 VERSION = "0.1.1"
@@ -633,8 +634,11 @@ class ReviseCSVFrame(wx.Frame):
         self.hyi = self.dataCols.index("hPosY")
         self.bxi = self.dataCols.index("bPosX")
         self.byi = self.dataCols.index("bPosY")
-        self.mhdi = self.dataCols.index("mHD")
-        self.mhpi = self.dataCols.index("mHPos")
+        # * column names were changed from mHD & mHPos to manHD & manHP in 2020
+        if "mHD" in self.dataCols: self.mhdi = self.dataCols.index("mHD")
+        else: self.mhdi = self.dataCols.index("manHD")
+        if "mHPos" in self.dataCols: self.mhpi = self.dataCols.index("mHPos")
+        else: self.mhpi = self.dataCols.index("manHP")
 
         self.play() # for processing the 1st frame
 
